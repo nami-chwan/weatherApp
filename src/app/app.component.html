@@ -1,0 +1,31 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="color">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+
+      <ion-title start>Weather App</ion-title>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header>
+      <ion-toolbar color="color">
+        <ion-title>Navigate</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="true">
+
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-content>
+    <router-outlet id="content1"></router-outlet>
+  </ion-content>
+</ion-app>
