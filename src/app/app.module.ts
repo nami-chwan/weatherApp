@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { WeatherModule } from './weather/weather.module';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 
 @NgModule({
   declarations: [
@@ -28,8 +31,11 @@ import { WeatherModule } from './weather/weather.module';
     StatusBar,
     SplashScreen,
     Title,
+    Geolocation,
+    NativeGeocoder,
     { 
-      provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+      provide: RouteReuseStrategy, useClass: IonicRouteStrategy 
+    }
   ],
   bootstrap: [
     AppComponent

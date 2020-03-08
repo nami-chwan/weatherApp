@@ -6,6 +6,7 @@ export class Weather {
     wind: string;
     tempMin: string;
     tempMax: string;
+    cityName: string;
 
     constructor() {
 
@@ -15,6 +16,7 @@ export class Weather {
         this.wind = "";
         this.tempMin = "";
         this.tempMax = "";
+        this.cityName = "";
     }
 
 }
