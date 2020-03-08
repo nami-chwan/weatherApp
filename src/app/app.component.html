@@ -1,6 +1,6 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar color="color">
+    <ion-toolbar color="secondary">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
@@ -13,13 +13,18 @@
 
   <ion-menu side="start" menuId="first" contentId="content1">
     <ion-header>
-      <ion-toolbar color="color">
+      <ion-toolbar color="secondary">
         <ion-title>Navigate</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="true">
+          <ion-item>
+            <ion-input value="custom"><i class='material-icons'>search</i></ion-input>
+
+          </ion-item>  
+          
 
         </ion-menu-toggle>
       </ion-list>
