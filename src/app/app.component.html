@@ -1,9 +1,5 @@
 <ion-app>
   <ion-content>
-    <div *ngIf="!city && !messageError">
-      <ion-progress-bar type="indeterminate"></ion-progress-bar>
-    </div>
-
     <ion-menu side="start" content-id="main-content">
       <ion-content>
         <ion-header>
@@ -45,22 +41,6 @@
         </ion-header>
         <app-weather></app-weather>
       </div>
-      <div *ngIf="messageError" class="messageError" style="height: 100%">         
-        <ion-row class="messageError ion-align-items-center ion-justify-content-center" style="height: 100%">
-          <ion-card>
-            <ion-item>
-              <ion-label>Erreur</ion-label>
-              <ion-button color="personal" (click)="retry()" fill="outline" slot="end"> Retry
-                <ion-icon name="refresh" slot="end"></ion-icon>
-              </ion-button>
-            </ion-item>
-    
-            <ion-card-content>
-              {{ messageError }}
-            </ion-card-content>
-          </ion-card>
-        </ion-row>
-    </div>
     </ion-content>
     <router-outlet id="main-content"></router-outlet>
   </ion-content>

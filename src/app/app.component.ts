@@ -8,6 +8,7 @@ import { WeatherService } from './shared/services/weather.service';
 import { PositionService } from './shared/services/position.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Weather } from './shared/models/weather';
+import { ToastService } from './shared/services/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,6 @@ export class AppComponent {
   private cityForm: FormGroup;
   private cityList: string[] = [];
   private weather: Weather;
-  private messageError;
 
   constructor(
 
@@ -28,9 +28,10 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private positionService: PositionService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private toastService: ToastService
   ) {
-    this.retry();
+    
     this.weather = this.weatherService.getWeather();
     this.formBuilder = new FormBuilder;
     this.cityForm = this.formBuilder.group({
@@ -44,23 +45,16 @@ export class AppComponent {
       .then((position) => {
         this.weatherService.getWeatherByPosition(position)
           .then((weather) => {
-
             this.weatherService.setWeather(weather);
           })
           .catch((error) => {
-            this.messageError = error;
+            this.toastService.showToast(error.message, "Warning", "danger", "middle");
 
           });
       })
-      .catch((error) => {
-        this.messageError = error;
+      .catch((error: Error) => {
+        this.toastService.showToast(error.message, "Warning", "danger", "middle");
       })
-
-  }
-
-  public retry() {
-    this.positionService.getPositionByCoordinates();
-    
 
   }
 
@@ -70,7 +64,7 @@ export class AppComponent {
         this.weatherService.setWeather(weather);
       })
       .catch((error) => {
-        this.messageError = error;
+        this.toastService.showToast(error.message, "Warning", "danger", "middle");
       })
 
   }
@@ -93,7 +87,7 @@ export class AppComponent {
 
       })
       .catch((error) => {
-        this.messageError = error;
+        this.toastService.showToast(error.message, "Warning", "danger", "middle");
       })
       .finally(() => {
         this.cityForm.reset();

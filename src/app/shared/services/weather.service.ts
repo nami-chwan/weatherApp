@@ -7,11 +7,11 @@ import { Geoposition } from '@ionic-native/geolocation/ngx';
 })
 export class WeatherService {
   private weather: Weather;
+  private weatherAvailable: boolean;
 
   constructor() {
-
     this.weather = new Weather;
-
+    this.weatherAvailable = false;
   }
 
   public getWeatherByName(name: string): Promise<Weather> {
@@ -39,11 +39,18 @@ export class WeatherService {
 
   }
 
-  getWeather() {
+  public getWeather() {
     return this.weather;
   }
 
-  setWeather(weather: Weather) {
+  public setWeather(weather: Weather) {
+    if (weather.currentTemp == undefined) {
+      this.weatherAvailable = false;
+    }
+    else {
+      this.weatherAvailable = true;
+    }
+
     this.weather.icon = weather.icon;
     this.weather.cityName = weather.cityName;
     this.weather.currentTemp = weather.currentTemp;
@@ -52,6 +59,10 @@ export class WeatherService {
     this.weather.tempMax = weather.tempMax;
     this.weather.tempMin = weather.tempMin;
     this.weather.wind = weather.wind;
+  }
+
+  public getWeatherAvailability(): boolean {
+    return this.weatherAvailable;
   }
 
   public getWeatherByPosition(position: Geoposition): Promise<Weather> {

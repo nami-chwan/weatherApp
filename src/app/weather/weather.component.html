@@ -1,43 +1,67 @@
-<ion-content class="ion-text-center">
+<ion-content class="ion-text-center" style="font-size: 25px;">
   <div>
-    <h2 style="font-size: 50px;">
-      {{ weather.currentTemp }}°C
-    </h2>
-  </div>
-  <div>
-    <img style="width: 200px; height: 200px;" src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" />
-  </div>
-</ion-content>
-<ion-footer>
-  <div class="ion-text-center details">
     <div>
-      Info temps :
+      <h2 style="font-size: 50px;">
+        {{ weather.currentTemp }}°C
+      </h2>
+    </div>
+    <div>
+      <img style="width: 200px; height: 200px;" src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" />
+    </div>
+  </div>
+  <div>
+    <div>
       {{ weather.description }}
-      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/sun-1.png" />
-    </div>
-
-    <div>
-      Taux d'humidité :
-      {{ weather.humidity }} %
-      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/074-humidity.png" />
-    </div>
-
-    <div>
-      Température Max :
-      {{ weather.tempMax }} °C
-      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer-1.png" />
-    </div>
-
-    <div>
-      Température Min :
-      {{ weather.tempMin }} °C
-      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer.png" />
-    </div>
-
-    <div>
-      Vitesse du vent :
-      {{ weather.wind }} km/h
-      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/windsock.png" />
     </div>
   </div>
-</ion-footer>
+  <ion-grid class="ion-text-center">
+    <ion-row class="col-12">
+      <ion-col class="col-12">
+        <div>
+          <div>
+            {{ weather.humidity }} %
+          </div>
+          <div>
+            <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/074-humidity.png" />
+          </div>
+        </div>
+      </ion-col>
+      <ion-col class="col-6">
+        <div>
+          <div>
+            {{ weather.wind }} km/h
+          </div>
+          <div>
+            <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/windsock.png" />
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="ion-text-center">
+    <ion-row class="col-12">
+      <ion-col class="col-6">
+        <div>
+          <div>
+            {{ weather.tempMin }} °C
+          </div>
+          <div>
+            <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer.png" />
+          </div>
+        </div>
+
+      </ion-col>
+      <ion-col class="col-6">
+        <div>
+          <div>
+            {{ weather.tempMax }} °C
+          </div>
+          <div>
+            <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer-1.png" />
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
