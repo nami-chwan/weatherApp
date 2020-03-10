@@ -1,46 +1,67 @@
 <ion-app>
-  <ion-menu side="start" content-id="main-content">
-    <ion-header>
-      <ion-toolbar translucent>
-        <ion-title>Recherche</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <form [formGroup]="cityForm" (ngSubmit)="getCity()" class="ion-text-center">
-        <ion-list>
-
-          <ion-input formControlName="city" placeholder="Indiquer le nom de votre ville ici..." class="autocomplete">
-            <ion-icon name="search" slot="start"></ion-icon>
-          </ion-input>
-
-        </ion-list>
-      </form>
-
-      <ion-list *ngFor="let city of cityList">
-        <ion-item (click)="onCityClicked(city)">
-          <ion-icon name="location-outline" slot="start"></ion-icon>
-          <ion-label>{{ city }}</ion-label>
-          <ion-icon (click)="onDeleteCity(city)" name="close-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
   <ion-content>
-    <div class="ion-page" id="main-content">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>{{ weather.cityName }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
+    <div *ngIf="!city && !messageError">
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
     </div>
-    <router-outlet id="main-content"></router-outlet>
-  </ion-content>
 
-  <ion-content>
-    <app-weather></app-weather>
+    <ion-menu side="start" content-id="main-content">
+      <ion-content>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Recherche</ion-title>
+          </ion-toolbar>
+        </ion-header>
+
+        <form [formGroup]="cityForm" (ngSubmit)="getCity()" class="ion-text-center">
+          <ion-list>
+            <ion-input formControlName="city" placeholder="Indiquer le nom de votre ville ici..." class="autocomplete">
+              <ion-icon name="search" slot="start"></ion-icon>
+            </ion-input>
+          </ion-list>
+        </form>
+
+        <ion-list *ngFor="let city of cityList">
+          <ion-item (click)="onCityClicked(city)">
+            <ion-icon name="location-outline" slot="start"></ion-icon>
+            <ion-label>{{ city }}</ion-label>
+            <ion-icon (click)="onDeleteCity(city)" name="close-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+    <ion-content>
+      <div class="ion-page" id="main-content">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title class="ion-text-center">
+              <ion-icon name="location-outline"></ion-icon>
+              {{ weather.cityName }}
+            </ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <app-weather></app-weather>
+      </div>
+      <div *ngIf="messageError" class="messageError" style="height: 100%">         
+        <ion-row class="messageError ion-align-items-center ion-justify-content-center" style="height: 100%">
+          <ion-card>
+            <ion-item>
+              <ion-label>Erreur</ion-label>
+              <ion-button color="personal" (click)="retry()" fill="outline" slot="end"> Retry
+                <ion-icon name="refresh" slot="end"></ion-icon>
+              </ion-button>
+            </ion-item>
+    
+            <ion-card-content>
+              {{ messageError }}
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+    </div>
+    </ion-content>
+    <router-outlet id="main-content"></router-outlet>
   </ion-content>
 </ion-app>

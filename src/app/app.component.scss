@@ -1,0 +1,29 @@
+:host {
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        overflow: hidden;
+    }
+
+    ion-app {
+        background-image: url('../assets/img/weather.png');
+    }
+
+    app-weather {
+        margin: auto;
+        width: 100vw;
+        height: 100vh;
+    }
+    .messageError {
+        width: 100 vw;
+        height: 100 vh;
+        position: fixed;
+        margin: auto;
+        background-color: black;
+        opacity: .8;
+    }
+
+}
+

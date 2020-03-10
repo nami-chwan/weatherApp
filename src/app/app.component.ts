@@ -20,6 +20,7 @@ export class AppComponent {
   private cityForm: FormGroup;
   private cityList: string[] = [];
   private weather: Weather;
+  private messageError;
 
   constructor(
 
@@ -29,7 +30,7 @@ export class AppComponent {
     private positionService: PositionService,
     private weatherService: WeatherService
   ) {
-
+    this.retry();
     this.weather = this.weatherService.getWeather();
     this.formBuilder = new FormBuilder;
     this.cityForm = this.formBuilder.group({
@@ -43,33 +44,38 @@ export class AppComponent {
       .then((position) => {
         this.weatherService.getWeatherByPosition(position)
           .then((weather) => {
-            console.log("update weather");
 
             this.weatherService.setWeather(weather);
           })
-          .catch(() => {
-            console.log("fail weather");
+          .catch((error) => {
+            this.messageError = error;
 
           });
       })
-      .catch(() => {
-        console.log("fail position");
-
+      .catch((error) => {
+        this.messageError = error;
       })
 
   }
 
-  onCityClicked(city: string) {
+  public retry() {
+    this.positionService.getPositionByCoordinates();
+    
+
+  }
+
+  public onCityClicked(city: string) {
     this.weatherService.getWeatherByName(city)
       .then((weather) => {
         this.weatherService.setWeather(weather);
       })
-      .catch(() => {
-
+      .catch((error) => {
+        this.messageError = error;
       })
+
   }
 
-  onDeleteCity(city) {
+  public onDeleteCity(city) {
     const index = this.cityList.indexOf(city);
     if (index > -1) {
       this.cityList.splice(index, 1);
@@ -77,7 +83,7 @@ export class AppComponent {
 
   }
 
-  getCity() {
+  public getCity() {
     this.weatherService.getWeatherByName(this.cityForm.value.city)
       .then((weather) => {
         if (this.cityList.indexOf(weather.cityName) == -1) {
@@ -86,8 +92,8 @@ export class AppComponent {
         }
 
       })
-      .catch(() => {
-
+      .catch((error) => {
+        this.messageError = error;
       })
       .finally(() => {
         this.cityForm.reset();

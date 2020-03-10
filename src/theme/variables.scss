@@ -4,6 +4,10 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  ion-content {
+    --background: url('../assets/img/weather.png') no-repeat center/cover fixed;
+}
+  --ion-color-bleu: rgb(0, 183, 255);
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;

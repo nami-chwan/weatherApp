@@ -1,11 +1,43 @@
-<ion-card>
-  <img src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" />
-  <ion-card-header>
-    <ion-card-subtitle></ion-card-subtitle>
-    <ion-card-title><ion-icon slot="start" name="location-outline"></ion-icon>{{ weather.cityName }}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-label><ion-icon slot="start" name="thermometer-outline"></ion-icon> {{ weather.currentTemp }}°C</ion-label><br>
-    <ion-label><ion-icon slot="start" name="information-circle-outline"></ion-icon> {{ weather.description }}</ion-label>
-  </ion-card-content>
-</ion-card>
+<ion-content class="ion-text-center">
+  <div>
+    <h2 style="font-size: 50px;">
+      {{ weather.currentTemp }}°C
+    </h2>
+  </div>
+  <div>
+    <img style="width: 200px; height: 200px;" src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" />
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="ion-text-center details">
+    <div>
+      Info temps :
+      {{ weather.description }}
+      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/sun-1.png" />
+    </div>
+
+    <div>
+      Taux d'humidité :
+      {{ weather.humidity }} %
+      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/074-humidity.png" />
+    </div>
+
+    <div>
+      Température Max :
+      {{ weather.tempMax }} °C
+      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer-1.png" />
+    </div>
+
+    <div>
+      Température Min :
+      {{ weather.tempMin }} °C
+      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/thermometer.png" />
+    </div>
+
+    <div>
+      Vitesse du vent :
+      {{ weather.wind }} km/h
+      <img slot="end" style="width: 30px; height: 30px;" src="../../assets/weatherIcons/png/windsock.png" />
+    </div>
+  </div>
+</ion-footer>
