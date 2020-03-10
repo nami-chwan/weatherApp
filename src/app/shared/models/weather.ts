@@ -7,9 +7,10 @@ export class Weather {
     tempMin: string;
     tempMax: string;
     cityName: string;
+    icon: string;
 
     constructor() {
-
+        this.icon = "";
         this.description = "";
         this.currentTemp = "";
         this.humidity = "";

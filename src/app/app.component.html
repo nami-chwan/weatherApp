@@ -1,86 +1,46 @@
-<!-- <ion-app>
-  <ion-header>
-    <ion-toolbar color="secondary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-
-
-      <ion-title start>Weather App</ion-title>
-
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-menu side="start" menuId="first" contentId="content1">
+<ion-app>
+  <ion-menu side="start" content-id="main-content">
     <ion-header>
-      <ion-toolbar color="secondary">
+      <ion-toolbar translucent>
         <ion-title>Recherche</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
-        <ion-menu-toggle >
-          <ion-list *ngFor="let city of cityList">
-            <ion-chip>{{ city.name }}</ion-chip>
-          </ion-list>
-          <ion-item>
-            <ion-input placeholder="Indiquer le nom de votre ville ici..." attribute="autocomplete"></ion-input>
+      <form [formGroup]="cityForm" (ngSubmit)="getCity()" class="ion-text-center">
+        <ion-list>
 
-          </ion-item>  
-          
+          <ion-input formControlName="city" placeholder="Indiquer le nom de votre ville ici..." class="autocomplete">
+            <ion-icon name="search" slot="start"></ion-icon>
+          </ion-input>
 
-        </ion-menu-toggle>
+        </ion-list>
+      </form>
+
+      <ion-list *ngFor="let city of cityList">
+        <ion-item (click)="onCityClicked(city)">
+          <ion-icon name="location-outline" slot="start"></ion-icon>
+          <ion-label>{{ city }}</ion-label>
+          <ion-icon (click)="onDeleteCity(city)" name="close-outline" slot="end"></ion-icon>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
+
   <ion-content>
-    <ion-card>
-      <img src="" />
-      <ion-card-header>
-        <ion-card-subtitle></ion-card-subtitle>
-        <ion-card-title></ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-      </ion-card-content>
-    </ion-card>
-    <router-outlet id="content1"></router-outlet>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>{{ weather.cityName }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </div>
+    <router-outlet id="main-content"></router-outlet>
   </ion-content>
-</ion-app> -->
-<ion-app>
-<ion-menu side="start" content-id="main-content">
-  <ion-header>
-    <ion-toolbar translucent>
-      <ion-title>Recherche</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
   <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-input placeholder="Indiquer le nom de votre ville ici..." attribute="autocomplete">
-          <ion-icon name="search" slot="start"></ion-icon>
-        </ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-list *ngFor="let city of cityList">
-      <ion-item>
-        <ion-icon name="heart" slot="start"></ion-icon>
-        <ion-label>{{ city.name }}</ion-label>
-      </ion-item>
-    </ion-list>
+    <app-weather></app-weather>
   </ion-content>
-</ion-menu>
-
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>WeatherApp</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-</div>
-  <router-outlet id="main-content"></router-outlet>
-
 </ion-app>

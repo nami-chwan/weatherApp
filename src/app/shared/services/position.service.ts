@@ -10,7 +10,7 @@ export class PositionService {
     private geolocation: Geolocation
   ) { }
 
-  public retrieveByCoordinates(): Promise<Geoposition> {
+  public getPositionByCoordinates(): Promise<Geoposition> {
     return new Promise((resolve, reject) => {
 
       this.geolocation.getCurrentPosition()

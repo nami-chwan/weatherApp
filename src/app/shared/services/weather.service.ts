@@ -6,69 +6,91 @@ import { Geoposition } from '@ionic-native/geolocation/ngx';
   providedIn: 'root'
 })
 export class WeatherService {
-  weather: Weather;
+  private weather: Weather;
 
   constructor() {
+
     this.weather = new Weather;
+
   }
 
-  public retrieveByName(name): Promise<Weather> {
+  public getWeatherByName(name: string): Promise<Weather> {
 
     return new Promise((resolve, reject) => {
-
       const xhr = new XMLHttpRequest;
 
       xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q='
         + name + '&APPID=e6bf7577fe8908916accd3e054fd6ace&lang=fr&units=metric');
       xhr.setRequestHeader('Accept', 'application/json');
-      xhr.onload = () => {
-        if (200 !== xhr.status) {
-          return reject(xhr.status);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status !== 200) {
+          reject(xhr.status);
         }
+        else if (xhr.readyState == 4 && xhr.status == 200) {
+          const json = JSON.parse(xhr.response);
+          const weather = this.convertJsonToWeather(json);
 
-        const json = JSON.parse(xhr.response);
-        this.convertJsonToWeather(json);
-
-        return resolve(this.weather);
+          resolve(weather);
+        }
       }
 
       xhr.send();
     });
+
   }
 
-  public retrieveByPosition(position: Geoposition): Promise<Weather> {
+  getWeather() {
+    return this.weather;
+  }
+
+  setWeather(weather: Weather) {
+    this.weather.icon = weather.icon;
+    this.weather.cityName = weather.cityName;
+    this.weather.currentTemp = weather.currentTemp;
+    this.weather.description = weather.description;
+    this.weather.humidity = weather.humidity;
+    this.weather.tempMax = weather.tempMax;
+    this.weather.tempMin = weather.tempMin;
+    this.weather.wind = weather.wind;
+  }
+
+  public getWeatherByPosition(position: Geoposition): Promise<Weather> {
 
     return new Promise((resolve, reject) => {
-
       const xhr = new XMLHttpRequest;
 
-      xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&appid=e6bf7577fe8908916accd3e054fd6ace&lang=fr&units=metric');
+      xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=' + position.coords.latitude +
+        '&lon=' + position.coords.longitude + '&appid=e6bf7577fe8908916accd3e054fd6ace&lang=fr&units=metric');
       xhr.setRequestHeader('Accept', 'application/json');
-      xhr.onload = () => {
-        if (200 !== xhr.status) {
-          return reject(xhr.status);
+      xhr.onreadystatechange = () => {
+
+        if (xhr.readyState == 4 && xhr.status !== 200) {
+          reject(xhr.status);
         }
+        else if (xhr.readyState == 4 && xhr.status == 200) {
+          const json = JSON.parse(xhr.response);
+          const weather = this.convertJsonToWeather(json);
 
-        const json = JSON.parse(xhr.response);
-        this.convertJsonToWeather(json);
-
-        return resolve(this.weather);
+          resolve(weather);
+        }
       }
-
       xhr.send();
     });
+
   }
 
-  private convertJsonToWeather(json) {
-    this.weather.currentTemp = json.main.temp;
-    this.weather.description = json.weather[0].description;
-    this.weather.humidity = json.main.humidity;
-    this.weather.wind = json.wind.speed;
-    this.weather.tempMin = json.main.temp_min;
-    this.weather.tempMax = json.main.temp_max;
-    this.weather.cityName = json.name;
-
-    console.log(this.weather);
+  private convertJsonToWeather(json): Weather {
+    const weather = new Weather;
+    weather.icon = json.weather[0].icon;
+    weather.description = json.weather[0].description;
+    weather.currentTemp = json.main.temp;
+    weather.humidity = json.main.humidity;
+    weather.wind = json.wind.speed;
+    weather.tempMin = json.main.temp_min;
+    weather.tempMax = json.main.temp_max;
+    weather.cityName = json.name;
+    return weather;
   }
+
 }
 

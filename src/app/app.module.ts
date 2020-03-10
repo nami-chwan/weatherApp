@@ -13,18 +13,22 @@ import { WeatherModule } from './weather/weather.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WeatherComponent } from './weather/weather.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WeatherComponent
   ],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     SharedModule,
     WeatherModule,
-    IonicModule.forRoot(), 
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule.forRoot(),
     AppRoutingModule
   ],
   providers: [
@@ -33,12 +37,12 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     Title,
     Geolocation,
     NativeGeocoder,
-    { 
-      provide: RouteReuseStrategy, useClass: IonicRouteStrategy 
-    }
+    {
+      provide: RouteReuseStrategy, useClass: IonicRouteStrategy
+    },
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }

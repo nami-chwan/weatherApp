@@ -1,9 +1,11 @@
-<!-- <ion-card>
-  <img src="./madison.jpg" />
+<ion-card>
+  <img src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" />
   <ion-card-header>
     <ion-card-subtitle></ion-card-subtitle>
-    <ion-card-title></ion-card-title>
+    <ion-card-title><ion-icon slot="start" name="location-outline"></ion-icon>{{ weather.cityName }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
+    <ion-label><ion-icon slot="start" name="thermometer-outline"></ion-icon> {{ weather.currentTemp }}°C</ion-label><br>
+    <ion-label><ion-icon slot="start" name="information-circle-outline"></ion-icon> {{ weather.description }}</ion-label>
   </ion-card-content>
-</ion-card> -->
+</ion-card>
